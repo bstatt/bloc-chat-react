@@ -8,7 +8,8 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
-      roomInput: ''
+      roomInput: '',
+      activeRoom: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,12 +36,17 @@ class RoomList extends Component {
     event.preventDefault();
   }
 
+  handleRoomClick(event) {
+    const activeRoom = event.target.textContent;
+    console.log('the room I clicked is ' + activeRoom);
+  }
+
   render() {
     return(
       <section className="room-list-section">
         <ul>
           {this.state.rooms.map((room, index) =>
-              <li className="room-name" key={index}>{room.name}</li>
+              <li className="room-name" key={index} onClick={this.handleRoomClick}>{room.name}</li>
           )}
        </ul>
        <form className="add-room-form" onSubmit={this.createRoom}>
