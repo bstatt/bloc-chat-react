@@ -8,9 +8,9 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
-      roomInputs: [
-        {name: '', isEntered: ''}
-      ],
+      // roomInputs: [
+      //   {name: ''}
+      // ],
       newChatRoom: ''
     };
 
@@ -33,20 +33,13 @@ class RoomList extends Component {
   createRoom(event) {
     event.preventDefault();
     if(!this.state.newChatRoom) { return }
-    const newRoom = { name:this.state.newChatRoom, isEntered: true };
-    this.setState({ roomInputs: [...this.state.roomInputs, newRoom], newChatRoom: ''})
+    const newRoom = { name: this.state.newChatRoom};
+    this.setState({ rooms: [...this.state.rooms, newRoom], newChatRoom: ''})
     this.roomsRef.push({
       name: newRoom.name
     })
 
   }
-
- //  handleSubmit(e) {
- //   e.preventDefault();
- //   if (!this.state.newTodoDescription) { return }
- //   const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
- //   this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
- // }
 
   render() {
     return(
