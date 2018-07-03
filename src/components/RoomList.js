@@ -8,10 +8,10 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
-      roomInput: {
-        value: '',
-        isEmpty: true
-      },
+      roomInputs: [
+        {name: '', isEntered: ''}
+      ],
+      newChatRoom: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,18 +27,26 @@ class RoomList extends Component {
   }
 
   handleChange(event) {
-    //handle change needs to update the room input with the current value input. It also needs to clear the input field after submit. So maybe that portion should be on the create room function??
-    const toggleInputField = this.state.isEmpty ? false : true;
-    this.setState({roomInput: {value: event.target.value, isEmpty: toggleInputField} });
+    this.setState({ newChatRoom: event.target.value });
   }
 
   createRoom(event) {
-    const newRoom = this.state.roomInput.value;
-    this.roomsRef.push({
-      name: newRoom
-    })
     event.preventDefault();
+    if(!this.state.newChatRoom) { return }
+    const newRoom = { name:this.state.newChatRoom, isEntered: true };
+    this.setState({ roomInputs: [...this.state.roomInputs, newRoom], newChatRoom: ''})
+    this.roomsRef.push({
+      name: newRoom.name
+    })
+
   }
+
+ //  handleSubmit(e) {
+ //   e.preventDefault();
+ //   if (!this.state.newTodoDescription) { return }
+ //   const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
+ //   this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
+ // }
 
   render() {
     return(
@@ -49,7 +57,7 @@ class RoomList extends Component {
           )}
        </ul>
        <form className="add-room-form" onSubmit={this.createRoom}>
-        <input type="text" name="room-name" value={this.state.roomInput.value} onChange={this.handleChange}/>
+        <input type="text" name="room-name" value={this.state.newChatRoom} onChange={this.handleChange}/>
         <input type="submit" value="Create Room" />
        </form>
       </section>
