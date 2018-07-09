@@ -8,8 +8,7 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
-      roomInput: '',
-      activeRoom: ''
+      newChatRoom: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,20 +24,17 @@ class RoomList extends Component {
   }
 
   handleChange(event) {
-    this.setState({roomInput: event.target.value})
+    this.setState({ newChatRoom: event.target.value });
   }
 
   createRoom(event) {
-    const newRoom = this.state.roomInput;
-    this.roomsRef.push({
-      name: newRoom
-    })
     event.preventDefault();
-  }
-
-  handleRoomClick(event) {
-    const activeRoom = event.target.textContent;
-    console.log('the room I clicked is ' + activeRoom);
+    if(!this.state.newChatRoom) { return }
+    const newRoom = { name: this.state.newChatRoom};
+    this.setState({ rooms: [...this.state.rooms, newRoom], newChatRoom: ''})
+    this.roomsRef.push({
+      name: newRoom.name
+    })
   }
 
   render() {
@@ -46,11 +42,11 @@ class RoomList extends Component {
       <section className="room-list-section">
         <ul>
           {this.state.rooms.map((room, index) =>
-              <li className="room-name" key={index} onClick={this.handleRoomClick}>{room.name}</li>
+              <li className="room-name" key={index} onClick={this.props.handleRoomClick}>{room.name}</li>
           )}
        </ul>
        <form className="add-room-form" onSubmit={this.createRoom}>
-        <input type="text" name="room-name" value={this.state.roomInput} onChange={this.handleChange}/>
+        <input type="text" name="room-name" value={this.state.newChatRoom} onChange={this.handleChange}/>
         <input type="submit" value="Create Room" />
        </form>
       </section>
