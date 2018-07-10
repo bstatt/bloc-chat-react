@@ -8,12 +8,6 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
-<<<<<<< HEAD
-      // roomInputs: [
-      //   {name: ''}
-      // ],
-=======
->>>>>>> list-messages
       newChatRoom: ''
     };
 
