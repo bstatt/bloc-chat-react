@@ -8,9 +8,12 @@ class RoomList extends Component {
 
     this.state = {
       rooms: [],
+<<<<<<< HEAD
       // roomInputs: [
       //   {name: ''}
       // ],
+=======
+>>>>>>> list-messages
       newChatRoom: ''
     };
 
@@ -22,7 +25,7 @@ class RoomList extends Component {
     this.roomsRef.on('child_added', snapshot => {
       const room = snapshot.val();
       room.key = snapshot.key;
-      this.setState({ rooms: this.state.rooms.concat( snapshot.val() ) });
+      this.setState({ rooms: this.state.rooms.concat(room) });
     });
   }
 
@@ -38,15 +41,14 @@ class RoomList extends Component {
     this.roomsRef.push({
       name: newRoom.name
     })
-
   }
 
   render() {
     return(
       <section className="room-list-section">
         <ul>
-          {this.state.rooms.map((room, index) =>
-              <li className="room-name" key={index}>{room.name}</li>
+          {this.state.rooms.map((room) =>
+              <li className="room-name" key={room.key} onClick={() => this.props.handleRoomClick(room)}>{room.name}</li>
           )}
        </ul>
        <form className="add-room-form" onSubmit={this.createRoom}>
