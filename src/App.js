@@ -19,15 +19,15 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {activeRoom: 'The Active Room'};
-
+    this.state = {
+      activeRoom: ''
+    }
     this.handleRoomClick = this.handleRoomClick.bind(this);
   }
 
-  handleRoomClick(event){
-    const activeRoom = event.target.innerHTML;
+  handleRoomClick(room){
     this.setState({
-      activeRoom: activeRoom
+      activeRoom: room
     })
   }
 
@@ -36,7 +36,7 @@ class App extends Component {
       <div className="App">
         <h1>Bloc Chat</h1>
         <RoomList firebase={firebase} activeRoom={this.state.activeRoom} handleRoomClick={this.handleRoomClick}/>
-        <h2>{this.state.activeRoom}</h2>
+        <h2>{this.state.activeRoom.name}</h2>
         <MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
       </div>
     );
