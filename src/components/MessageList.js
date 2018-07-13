@@ -28,7 +28,7 @@ class MessageList extends Component {
           <li key={index}>
             <span>{message.content}</span>
           </li>
-  ))}
+        ))}
       </section>
     )
   }
