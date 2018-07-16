@@ -19,7 +19,7 @@ class User extends Component {
   render(){
     return(
       <section className="sign-in-section">
-        <h3>Welcome {(!this.props.user || this.props.user.displayName === '') ? 'Guest' : this.props.user.displayName}</h3>
+        <h3>Welcome {!this.props.user ? 'Guest' : this.props.user.displayName}</h3>
         <button onClick={this.signIn.bind(this)}>Sign In</button>
         <button onClick={this.signOut.bind(this)}>Sign Out</button>
       </section>

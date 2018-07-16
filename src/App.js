@@ -41,11 +41,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Bloc Chat</h1>
-        <RoomList firebase={firebase} activeRoom={this.state.activeRoom} handleRoomClick={this.handleRoomClick}/>
-        <h2>{this.state.activeRoom.name}</h2>
-        <MessageList firebase={firebase} activeRoom={this.state.activeRoom} user={this.state.user} />
-        <User firebase={firebase} user={this.state.user} setUser={this.setUser}/>
+        <nav className="navbar navbar-light bg-light">
+          <h1>Bloc Chat</h1>
+          <User firebase={firebase} user={this.state.user} setUser={this.setUser}/>
+        </nav>
+        <div className="container-fluid">
+          <div className="row">
+            <RoomList firebase={firebase} activeRoom={this.state.activeRoom} handleRoomClick={this.handleRoomClick}/>
+            <MessageList firebase={firebase} activeRoom={this.state.activeRoom} user={this.state.user} />
+          </div>
+        </div>
       </div>
     );
   }

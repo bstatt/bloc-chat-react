@@ -50,21 +50,28 @@ class MessageList extends Component {
 
   render() {
     return(
-      <section className="message-list">
-        <h1>Messages go here:</h1>
+      <section className="message-list col">
+        <h3>{this.props.activeRoom.name}</h3>
+        <ul className='list-group'>
         {this.state.messages.filter(message => message.roomId === this.props.activeRoom.key).map((message, index) => (
-          <li key={index}>
-            <ul>
-              <li>{message.username}</li>
-              <li>{message.content}</li>
-              <li>{message.sentAt}</li>
-            </ul>
+          <li key={index} className='list-group-item list-group-item-action flex-column align-items-start'>
+            <div className="d-flex w-100 justify-content-between">
+              <h5 className="mb-1">{message.username}</h5>
+              <small>{message.sentAt}</small>
+            </div>
+            <p className="mb-1">{message.content}</p>
+            <small className="text-muted">online</small>
           </li>
         ))}
+        </ul>
         <form className="add-message-form" onSubmit={this.addMessage}>
-          <label htmlFor="enter-message">Enter Message:</label>
-          <textarea id="enter-message" value={this.state.newMessage.content} onChange={this.handleMessageInput}></textarea>
-          <input type="submit" value="Send Message"/>
+          <div className="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Enter Message</span>
+            </div>
+            <textarea className="form-control" id="enter-message" value={this.state.newMessage.content} onChange={this.handleMessageInput}></textarea>
+            <input className="btn btn-primary btn-lg" type="submit" value="Send"/>
+          </div>
         </form>
       </section>
     )
